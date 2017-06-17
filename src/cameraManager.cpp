@@ -4,7 +4,7 @@
 // * Creation Date: 11/06/2017
 // * Copyright (c) 2017 Stenden University
 
-#include "CameraManager.h"
+#include "cameraManager.h"
 //--------------------------------------------------------------
 void CameraManager::setup(Camera_Configuration _cameraConfig)
 {

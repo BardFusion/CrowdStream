@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include "ofxJSON.h"
 #include "ofMain.h"
-#include "Configuration.h"
+#include "configuration.h"
 
 class ConfigurationManager
 {

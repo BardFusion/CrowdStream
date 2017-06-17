@@ -10,9 +10,9 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "../../../../addons/ofxCv/src/ofxCv.h"
-#include "Blob.h"
-#include "Configuration.h"
-#include "TrackingHistory.h"
+#include "blob.h"
+#include "configuration.h"
+#include "trackingHistory.h"
 
 using namespace cv;
 using namespace ofxCv;

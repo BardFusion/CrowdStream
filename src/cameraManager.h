@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 #include "ofMain.h"
-#include "Configuration.h"
+#include "configuration.h"
 #include "../../../../addons/ofxCv/src/ofxCv.h"
 
 #ifdef USE_PI_CAM

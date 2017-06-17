@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "ofxHttpUtils.h"
-#include "Configuration.h"
-#include "CsvManager.h"
+#include "configuration.h"
+#include "csvManager.h"
 
 class HTTPManager
 {

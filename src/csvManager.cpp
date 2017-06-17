@@ -4,7 +4,7 @@
 // * Creation Date: 04/06/2017
 // * Copyright (c) 2017 Stenden University
 
-#include "CsvManager.h"
+#include "csvManager.h"
 //--------------------------------------------------------------
 void CsvManager::setup(string saveFolder)
 {

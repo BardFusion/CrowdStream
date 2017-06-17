@@ -4,8 +4,8 @@
 // * Creation Date: 07/06/2017
 // * Copyright (c) 2017 Stenden University
 
-#ifndef Blob_h
-#define Blob_h
+#ifndef BLOB_H
+#define BLOB_H
 
 #include <stdio.h>
 #include "ofMain.h"
@@ -33,8 +33,8 @@ class Blob : public ofxCv::RectFollower
 		void update(const cv::Rect &track)
 		{
 			_currentPos = ofxCv::toOf(track).getCenter();
-			_blobWidth = ofxCv::toOf(track).width;
-			_blobHeight = ofxCv::toOf(track).height;
+            _blobWidth = int(ofxCv::toOf(track).width);
+            _blobHeight = int(ofxCv::toOf(track).height);
 		}
 		//--------------------------------------------------------------
 		void draw()
@@ -81,4 +81,4 @@ class Blob : public ofxCv::RectFollower
 };
 
 
-#endif /* Blob_h */
+#endif /* BLOB_H */

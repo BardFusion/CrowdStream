@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "ofxCsv.h"
-#include "Configuration.h"
+#include "configuration.h"
 
 class CsvManager
 {

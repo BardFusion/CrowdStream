@@ -7,11 +7,11 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ConfigurationManager.h"
-#include "CameraManager.h"
-#include "TrackingManager.h"
-#include "HTTPManager.h"
-#include "CsvManager.h"
+#include "configurationManager.h"
+#include "cameraManager.h"
+#include "trackingManager.h"
+#include "httpManager.h"
+#include "csvManager.h"
 
 class ofApp : public ofBaseApp
 {

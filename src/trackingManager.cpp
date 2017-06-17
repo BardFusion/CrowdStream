@@ -4,7 +4,7 @@
 // * Creation Date: 12/06/2017
 // * Copyright (c) 2017 Stenden University
 
-#include "TrackingManager.h"
+#include "trackingManager.h"
 //--------------------------------------------------------------
 void TrackingManager::setup(Tracking_Configuration _trackingConfig)
 {
