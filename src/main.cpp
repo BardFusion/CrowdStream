@@ -1,3 +1,9 @@
+// * Name: main.cpp
+// * Project: AirMore
+// * Author: Project group - IT2B
+// * Creation Date: 06/06/2017
+// * Copyright (c) 2017 Stenden University
+
 #include "ofMain.h"
 #include "ofApp.h"
 

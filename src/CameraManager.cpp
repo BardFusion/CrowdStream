@@ -1,8 +1,8 @@
 // * Name: CameraManager.cpp
-// * Project: Footfall
-// * Author: David Haylock
-// * Creation Date: 13/02/2017
-// * Copyright: (c) 2017 by Watershed Arts Trust Ltd.
+// * Project: AirMore
+// * Author: Project group - IT2B
+// * Creation Date: 11/06/2017
+// * Copyright (c) 2017 Stenden University
 
 #include "CameraManager.h"
 //--------------------------------------------------------------

@@ -1,9 +1,8 @@
-//
 // * Name: TrackingHistory.h
-// * Project: Footfall
-// * Author: David Haylock
-// * Creation Date: 13/02/2017
-// * Copyright: (c) 2017 by Watershed Arts Trust Ltd.
+// * Project: AirMore
+// * Author: Project group - IT2B
+// * Creation Date: 12/06/2017
+// * Copyright (c) 2017 Stenden University
 
 #ifndef TrackingHistory_h
 #define TrackingHistory_h

@@ -1,8 +1,8 @@
 // * Name: Blob.h
-// * Project: Footfall
-// * Author: David Haylock
-// * Creation Date: 13/02/2017
-// * Copyright: (c) 2017 by Watershed Arts Trust Ltd.
+// * Project: AirMore
+// * Author: Project group - IT2B
+// * Creation Date: 07/06/2017
+// * Copyright (c) 2017 Stenden University
 
 #ifndef Blob_h
 #define Blob_h
@@ -12,8 +12,16 @@
 #include "../../../../addons/ofxCv/src/ofxCv.h"
 
 class Blob : public ofxCv::RectFollower
-{
+{    
+    private:
+
+        ofVec2f _currentPos;
+        ofVec2f _originPos;
+        int _blobWidth = 0;
+        int _blobHeight = 0;
+
 	public:
+
 		//--------------------------------------------------------------
 		void setup(const cv::Rect &track)
 		{
@@ -69,12 +77,7 @@ class Blob : public ofxCv::RectFollower
 			return _blobWidth;
 		}
 	
-		bool _evaluating = false;
-	private:
-		ofVec2f _currentPos;
-		ofVec2f _originPos;
-		int _blobWidth = 0;
-		int _blobHeight = 0;
+        bool _evaluating = false;
 };
 
 
