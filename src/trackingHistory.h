@@ -1,4 +1,4 @@
-// * Name: TrackingHistory.h
+// * Name: trackingHistory.h
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 12/06/2017

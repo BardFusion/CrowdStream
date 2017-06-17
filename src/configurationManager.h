@@ -1,4 +1,4 @@
-// * Name: ConfigurationManager.h
+// * Name: configurationManager.h
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 05/06/2017

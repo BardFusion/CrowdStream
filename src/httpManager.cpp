@@ -1,4 +1,4 @@
-// * Name: HTTPManager.cpp
+// * Name: httpManager.cpp
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 01/06/2017

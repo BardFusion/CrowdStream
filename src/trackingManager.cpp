@@ -1,4 +1,4 @@
-// * Name: TrackingManager.cpp
+// * Name: trackingManager.cpp
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 12/06/2017

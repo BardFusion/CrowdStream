@@ -1,4 +1,4 @@
-// * Name: Blob.h
+// * Name: blob.h
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 07/06/2017

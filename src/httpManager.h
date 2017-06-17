@@ -1,4 +1,4 @@
-// * Name: HTTPManager.h
+// * Name: httpManager.h
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 03/06/2017

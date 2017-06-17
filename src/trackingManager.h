@@ -1,4 +1,4 @@
-// * Name: TrackingManager.h
+// * Name: trackingManager.h
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 06/06/2017

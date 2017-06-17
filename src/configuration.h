@@ -1,4 +1,4 @@
-// * Name: Configuration.h
+// * Name: configuration.h
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 12/06/2017

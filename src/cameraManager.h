@@ -1,4 +1,4 @@
-// * Name: CameraManager.h
+// * Name: cameraManager.h
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 10/06/2017

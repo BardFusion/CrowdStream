@@ -1,4 +1,4 @@
-// * Name: CsvManager.h
+// * Name: csvManager.h
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 10/06/2017

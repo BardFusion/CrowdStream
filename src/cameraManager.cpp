@@ -1,4 +1,4 @@
-// * Name: CameraManager.cpp
+// * Name: cameraManager.cpp
 // * Project: AirMore
 // * Author: Project group - IT2B
 // * Creation Date: 11/06/2017
