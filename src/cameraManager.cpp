@@ -15,9 +15,9 @@ void CameraManager::setup(Camera_Configuration _cameraConfig)
 	if (_useMask)
 	{
 		// Get the Mask Coordinates
-		for (int i = 0; i < _cameraConfig.maskCoord.size(); i++)
+        for (unsigned long i = 0; i < _cameraConfig.maskCoord.size(); i++)
 		{
-			cv::Point p = cv::Point(_cameraConfig.maskCoord[i].x,_cameraConfig.maskCoord[i].y);
+            cv::Point p = cv::Point(int(_cameraConfig.maskCoord[i].x),int(_cameraConfig.maskCoord[i].y));
 			_maskPts.push_back(p);
 		}
 		
@@ -31,7 +31,7 @@ void CameraManager::setup(Camera_Configuration _cameraConfig)
 		
 		vector<cv::Point> polyright;
 		approxPolyDP(_maskPts, polyright, 1.0, true);
-		fillConvexPoly(mask,&polyright[0],polyright.size(),255,8,0);
+        fillConvexPoly(mask,&polyright[0],int(polyright.size()),255,8,0);
 	}
 	
 	// Setup the Background MOG2
@@ -40,7 +40,7 @@ void CameraManager::setup(Camera_Configuration _cameraConfig)
 										 _cameraConfig.bTrackShadows
 										 );
 	// This is the ratio of the shadow detection. I.e how many times lighter the shadow needs to be to be considered a blob.
-	pMOG2->setDouble("fTau", _cameraConfig.shadowPixelRatio);
+    pMOG2->setDouble("fTau", double(_cameraConfig.shadowPixelRatio));
 	
 #ifdef USE_VIDEO
 	cout << " - Using Video" << endl;

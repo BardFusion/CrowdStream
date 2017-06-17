@@ -13,7 +13,7 @@ void TrackingManager::setup(Tracking_Configuration _trackingConfig)
 	contourFinder.setMaxAreaRadius(_trackingConfig.maxarea);
 	contourFinder.setThreshold(_trackingConfig.threshold);
 	tracker.setMaximumDistance(_trackingConfig.maxdistance);
-	tracker.setPersistence(_trackingConfig.persistance);
+    tracker.setPersistence((unsigned int)_trackingConfig.persistance);
 
 	_oneBlob = _trackingConfig.minsizeone;
 	_twoBlob = _trackingConfig.minsizetwo;
@@ -23,7 +23,7 @@ void TrackingManager::setup(Tracking_Configuration _trackingConfig)
 	_camerawidth = _trackingConfig.camerawidth;
 	_cameraheight = _trackingConfig.cameraheight;
 	
-	trackingHistory.setup(_oneBlob,_twoBlob,_threeBlob,_trackingConfig.startPos.y);
+    trackingHistory.setup(_oneBlob,_twoBlob,_threeBlob,int(_trackingConfig.startPos.y));
 	
 	centerRect = ofRectangle(0, _trackingConfig.startPos.y-(_trackingConfig.offset/2), _camerawidth, _trackingConfig.offset);
 }
@@ -32,7 +32,7 @@ void TrackingManager::update(Mat processedMat)
 {
 	if(!processedMat.empty())
 	{
-		if (ofGetFrameNum() > _historyLength)
+        if (ofGetFrameNum() > (unsigned long)_historyLength)
 		{
 			contourFinder.findContours(processedMat);
 			tracker.track(contourFinder.getBoundingRects());
@@ -40,7 +40,7 @@ void TrackingManager::update(Mat processedMat)
 	}
 	
 	vector<Blob> &blobs = tracker.getFollowers();
-	for(int i = 0; i < blobs.size(); i++)
+    for(unsigned long i = 0; i < blobs.size(); i++)
 	{
 		if (centerRect.inside(blobs[i].getCurrentPosition().x, blobs[i].getCurrentPosition().y) && !blobs[i]._evaluating)
 		{
@@ -158,7 +158,7 @@ void TrackingManager::draw()
 	ofSetLineWidth(1);
 	ofFill();
 	vector<Blob> &followers = tracker.getFollowers();
-	for(int i = 0; i < followers.size(); i++)
+    for(unsigned long i = 0; i < followers.size(); i++)
 	{
 		followers[i].draw();
 	}
@@ -169,5 +169,5 @@ void TrackingManager::draw()
 	ofSetColor(255, 255, 255);
 	ofDrawRectangle(centerRect);
 	
-	trackingHistory.draw(_camerawidth,_cameraheight);
+    trackingHistory.draw(_camerawidth);
 }

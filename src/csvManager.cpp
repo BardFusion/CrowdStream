@@ -32,7 +32,7 @@ void CsvManager::saveRecords()
 {
 	logFile.createFile(ofToDataPath(_saveFolder+"/"+ofGetTimestampString("%Y-%m-%d-%H-%M")+".csv"));
 	
-	for (int i = 0; i < loggedData.size(); i++)
+    for (unsigned long i = 0; i < loggedData.size(); i++)
 	{
 		ofxCsvRow row;
 		row.setString(0, loggedData[i]._count);

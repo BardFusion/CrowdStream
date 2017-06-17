@@ -41,7 +41,7 @@ void ConfigurationManager::loadConfiguration(string file)
 		config.cameraConfig.bShowShadowImage = configFile["Footfall"]["CameraConfig"]["showshadowimage"].asBool();
 
 		vector<ofPoint> pts;
-		int maskSize = configFile["Footfall"]["CameraConfig"]["MaskArea"].size();
+        int maskSize = int(configFile["Footfall"]["CameraConfig"]["MaskArea"].size());
 		for (int i = 0 ; i < maskSize; i++) {
 			ofPoint pt = ofPoint(configFile["Footfall"]["CameraConfig"]["MaskArea"][i]["coordx"].asInt(),configFile["Footfall"]["CameraConfig"]["MaskArea"][i]["coordy"].asInt());
 			pts.push_back(pt);

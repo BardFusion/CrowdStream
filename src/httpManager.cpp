@@ -108,7 +108,7 @@ void HTTPManager::postSavedData(string count,string timestamp)
 //--------------------------------------------------------------
 void HTTPManager::newResponse(ofxHttpResponse &response)
 {
-	string _responseStr = ofToString(response.status) + ":" + (string)response.responseBody;
+    string _responseStr = ofToString(response.status) + ":" + string(response.responseBody);
 	if(ofToString(response.status) == "200" && !networkOk)
 	{
 		cout << "Server is OK" << endl;
@@ -147,7 +147,7 @@ void HTTPManager::uploadSavedRecords()
 		}
 		else
 		{
-			for(int file = 0; file < csvDir.getFiles().size(); file++)
+            for(unsigned long file = 0; file < csvDir.getFiles().size(); file++)
 			{
 				cout << "--------------------" << endl;
 				cout << csvDir[file].getFileName() << endl;
@@ -156,9 +156,9 @@ void HTTPManager::uploadSavedRecords()
 
 				cout << "--------------------" << endl;
 				
-				for (int i = 0; i < log.size(); i++)
+                for (unsigned long i = 0; i < log.size(); i++)
 				{
-					postSavedData(log.getRow(i).getString(0),log.getRow(i).getString(1));
+                    postSavedData(log.getRow(int(i)).getString(0),log.getRow(int(i)).getString(1));
 				}
 				
 				if (networkOk)
