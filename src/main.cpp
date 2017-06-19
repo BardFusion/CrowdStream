@@ -6,14 +6,25 @@
 
 #include "ofMain.h"
 #include "ofApp.h"
+#include "ofAppNoWindow.h"
 
 //========================================================================
 int main( ){
-	ofSetupOpenGL(320*3,300,OF_WINDOW);			// <-------- setup the GL context
+#ifdef USE_CONSOLE
+        ofAppNoWindow window;
+        ofSetupOpenGL(&window, WINDOW_WIDTH, WINDOW_HEIGHT, OF_FULLSCREEN);
+#endif
 
-	// this kicks off the running of my app
-	// can be OF_WINDOW or OF_FULLSCREEN
-	// pass in width and height too:
+#ifdef USE_GUI_FULLSCREEN
+        ofSetupOpenGL(WINDOW_WIDTH, WINDOW_HEIGHT, OF_FULLSCREEN);
+#endif
+
+#ifdef USE_GUI_WINDOWED
+        ofSetupOpenGL(WINDOW_WIDTH, WINDOW_HEIGHT, OF_WINDOW);
+#endif
+
+    // Start the application in either fullscreen, windowed
+    // or console only mode as specified in ofMain.h
 	ofRunApp(new ofApp());
 
 }
