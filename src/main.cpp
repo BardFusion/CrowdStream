@@ -4,6 +4,16 @@
 // * Creation Date: 06/06/2017
 // * Copyright (c) 2017 Stenden University
 
+//--------------------------
+// Specifies whether to use a
+// GUI or just console output
+//#define USE_GUI_FULLSCREEN
+#define USE_GUI_WINDOWED
+//#define USE_CONSOLE
+
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 384
+
 #include "ofMain.h"
 #include "ofApp.h"
 #include "ofAppNoWindow.h"
