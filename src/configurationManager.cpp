@@ -18,8 +18,7 @@ void ConfigurationManager::loadConfiguration(string file)
 	{
 		cout << " - Configuration File Found!" << endl;
 		
-		// App Settings
-		config.useHttp = configFile["Footfall"]["AppConfig"]["usehttp"].asBool();
+        // App Settings
 		config.useCsvLogging = configFile["Footfall"]["AppConfig"]["usecsvlogging"].asBool();
 		
 		config.cameraConfig.camerawidth = configFile["Footfall"]["CameraConfig"]["camerawidth"].asInt();
@@ -68,14 +67,7 @@ void ConfigurationManager::loadConfiguration(string file)
 		config.trackingConfig.maxdistance = configFile["Footfall"]["TrackingConfig"]["maxdistance"].asInt();
 		
 		config.trackingConfig.camerawidth = config.cameraConfig.camerawidth;
-		config.trackingConfig.cameraheight = config.cameraConfig.cameraheight;
-
-		// Post Data Settings
-		config.httpConfig.postserver = configFile["Footfall"]["HttpConfig"]["postserver"].asString();
-		config.httpConfig.postextension = configFile["Footfall"]["HttpConfig"]["postextension"].asString();
-		config.httpConfig.secretkey = configFile["Footfall"]["HttpConfig"]["secretkey"].asString();
-		config.httpConfig.maxretries = configFile["Footfall"]["HttpConfig"]["maxretries"].asInt();
-		config.httpConfig.keepbackups = configFile["Footfall"]["HttpConfig"]["keepbackups"].asBool();
+        config.trackingConfig.cameraheight = config.cameraConfig.cameraheight;
 	}
 }
 

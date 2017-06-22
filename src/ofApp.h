@@ -10,7 +10,6 @@
 #include "configurationManager.h"
 #include "cameraManager.h"
 #include "trackingManager.h"
-#include "httpManager.h"
 #include "csvManager.h"
 
 class ofApp : public ofBaseApp
@@ -26,8 +25,7 @@ class ofApp : public ofBaseApp
 		
 		ConfigurationManager configManager;
 		CameraManager cameraManager;
-		TrackingManager trackingManager;
-		HTTPManager httpManager;
+        TrackingManager trackingManager;
 		CsvManager csvManager;
 	
 		void blobIn(int &val);

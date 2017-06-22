@@ -55,23 +55,11 @@ struct Tracking_Configuration
 	int offset;
 };
 
-struct HTTP_Configuration
-{
-	int port;
-	string postserver;
-	string postextension;
-	string secretkey;
-	int maxretries;
-	bool keepbackups;
-};
-
 struct Configuration
 {
-	bool useHttp;
 	bool useCsvLogging;
 	Camera_Configuration cameraConfig;
-	Tracking_Configuration trackingConfig;
-	HTTP_Configuration httpConfig;
+    Tracking_Configuration trackingConfig;
 };
 
 struct Post_Data

@@ -17,13 +17,11 @@ void ofApp::setup()
 	
 	configManager.loadConfiguration("config.json");
 	
-	_logToCsv = configManager.getConfiguration().useCsvLogging;
-	_logToServer = configManager.getConfiguration().useHttp;
+    _logToCsv = configManager.getConfiguration().useCsvLogging;
 	
 	cameraManager.setup(configManager.getConfiguration().cameraConfig);
-	trackingManager.setup(configManager.getConfiguration().trackingConfig);
-	
-	if (_logToServer) httpManager.setup(configManager.getConfiguration().httpConfig);
+    trackingManager.setup(configManager.getConfiguration().trackingConfig);
+
 	if (_logToCsv) csvManager.setup("csvlogs");
 	
 	ofAddListener(trackingManager.blobIn, this, &ofApp::blobIn);
@@ -33,7 +31,6 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::exit()
 {
-	if (_logToServer) httpManager.close();
 	if (_logToCsv) csvManager.close();
 		
 	ofRemoveListener(trackingManager.blobIn, this, &ofApp::blobIn);
@@ -85,8 +82,7 @@ void ofApp::blobIn(int &val)
     {
         cout << val << " Person(s) Came In" << ", Count: " << (peopleIn-peopleOut) << endl;
     }
-	
-	if (_logToServer) httpManager.post(ofToString(val));
+
 	if (_logToCsv) csvManager.addRecord(ofToString(val), ofGetTimestampString("%Y-%m-%d %H:%M:%S"));
 }
 
@@ -98,7 +94,6 @@ void ofApp::blobOut(int &val)
     {
         cout << abs(val) << " Person(s) Went Out" << ", Count: " << (peopleIn-peopleOut) << endl;
     }
-	
-	if (_logToServer) httpManager.post(ofToString(val));
+
 	if (_logToCsv) csvManager.addRecord(ofToString(val), ofGetTimestampString("%Y-%m-%d %H:%M:%S"));
 }

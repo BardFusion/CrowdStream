@@ -1,7 +1,6 @@
 {
 	"Footfall": {
 		"AppConfig": {
-			"usehttp": false,
 			"usecsvlogging": false
 		},
 		"CameraConfig": {
@@ -41,13 +40,6 @@
 			"minsizeone": 50,
 			"minsizetwo": 200,
 			"minsizethree": 300
-		},
-		"HttpConfig": {
-			"keepbackups" : false,
-			"postserver":"",
-			"postextension":"",
-			"secretkey":"",
-			"maxretries":1
 		}
 	}
 }
