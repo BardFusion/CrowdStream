@@ -18,7 +18,6 @@
 #include "ofApp.h"
 #include "ofAppNoWindow.h"
 
-//========================================================================
 int main( ){
 #ifdef USE_CONSOLE
         ofAppNoWindow window;

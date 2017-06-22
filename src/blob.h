@@ -15,69 +15,64 @@ class Blob : public ofxCv::RectFollower
 {    
     private:
 
-        ofVec2f _currentPos;
-        ofVec2f _originPos;
-        int _blobWidth = 0;
-        int _blobHeight = 0;
+        ofVec2f current_position_;
+        ofVec2f origininal_position_;
+        int blob_width_ = 0;
+        int blob_height_ = 0;
 
 	public:
-
-		//--------------------------------------------------------------
 		void setup(const cv::Rect &track)
 		{
-			_currentPos = ofxCv::toOf(track).getCenter();
-			_originPos = ofxCv::toOf(track).getCenter();
-			_evaluating = false;
+            current_position_ = ofxCv::toOf(track).getCenter();
+            origininal_position_ = ofxCv::toOf(track).getCenter();
+            evaluating_ = false;
 		}
-		//--------------------------------------------------------------
+
 		void update(const cv::Rect &track)
 		{
-			_currentPos = ofxCv::toOf(track).getCenter();
-            _blobWidth = int(ofxCv::toOf(track).width);
-            _blobHeight = int(ofxCv::toOf(track).height);
+            current_position_ = ofxCv::toOf(track).getCenter();
+            blob_width_ = int(ofxCv::toOf(track).width);
+            blob_height_ = int(ofxCv::toOf(track).height);
 		}
-		//--------------------------------------------------------------
+
 		void draw()
 		{
 			ofPushStyle();
 			
-			if(_evaluating) {
+            if(evaluating_) {
 				ofSetColor(255);
 			}
 			else {
 				ofSetColor(0,255,0);
 			}
 			
-			ofDrawCircle(_currentPos, 5);
+            ofDrawCircle(current_position_, 5);
 			ofSetColor(255,0,0);
-			ofDrawCircle(_originPos, 5);
+            ofDrawCircle(origininal_position_, 5);
 			ofPopStyle();
 		}
-		//--------------------------------------------------------------
+
 		void kill()
 		{
 			dead = true;
-		}
-	
-		//--------------------------------------------------------------
+        }
+
 		ofVec2f getCurrentPosition()
 		{
-			return _currentPos;
-		}
-	
-		//--------------------------------------------------------------
+            return current_position_;
+        }
+
 		ofVec2f getOriginPosition()
 		{
-			return _originPos;
-		}
-	
-		//--------------------------------------------------------------
+            return origininal_position_;
+        }
+
 		int getWidth()
 		{
-			return _blobWidth;
+            return blob_width_;
 		}
 	
-        bool _evaluating = false;
+        bool evaluating_ = false;
 };
 
 

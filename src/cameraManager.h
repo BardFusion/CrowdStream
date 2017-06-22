@@ -25,9 +25,40 @@ using namespace ofxCv;
 
 class CameraManager
 {
+    private:
+
+    #ifdef USE_VIDEO
+        ofVideoPlayer video_player;
+    #endif
+
+    #ifdef USE_WEBCAM
+        ofVideoGrabber videoGrabber;
+    #endif
+
+    #ifdef USE_PI_CAM
+        ofxCvPiCam piCamera;
+    #endif
+
+        Mat video_matrix;
+        Mat processed_mog;
+        Mat mask;
+        Mat combined_mask;
+        Mat background;
+        Mat unprocessed_mog;
+
+        BackgroundSubtractorMOG2 *pMOG2;
+
+        vector<cv::Point> mask_points_;
+        bool useMask_;
+        bool show_shadows_;
+        int threshold_;
+        int dilate_amount_;
+        int erode_amount_;
+        int blur_;
+
 	public:
 		//! Setup
-		void setup(Camera_Configuration _cameraConfig);
+        void setup(Camera_Configuration camera_config);
 	
 		//! Update
 		void update();
@@ -36,38 +67,7 @@ class CameraManager
 		void draw();
 	
 		//! Get Image 
-		Mat getImage();
-	
-	private:
-	
-#ifdef USE_VIDEO
-		ofVideoPlayer videoPlayer;
-#endif
-	
-#ifdef USE_WEBCAM
-		ofVideoGrabber videoGrabber;
-#endif
-	
-#ifdef USE_PI_CAM
-		ofxCvPiCam piCamera;
-#endif
-	
-		Mat videoMatrix;
-		Mat processedMog;
-		Mat mask;
-		Mat combinedMask;
-		Mat background;
-		Mat unprocessed_MOG;
-	
-		BackgroundSubtractorMOG2 *pMOG2;
-	
-		vector<cv::Point> _maskPts;
-		bool _useMask;
-		bool _showShadows;
-		int _threshold;
-		int _dilateAmount;
-		int _erodeAmount;
-		int _blur;
+        Mat getImage();
 };
 
 #endif /* CameraManager_h */

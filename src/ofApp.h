@@ -31,8 +31,8 @@ class ofApp : public ofBaseApp
 		void blobIn(int &val);
 		void blobOut(int &val);
 	
-		bool _logToCsv;
-		bool _logToServer;
+        bool log_to_csv_;
+        bool log_to_server_;
 		int peopleIn;
 		int peopleOut;
 };

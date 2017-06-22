@@ -5,93 +5,93 @@
 // * Copyright (c) 2017 Stenden University
 
 #include "trackingManager.h"
-//--------------------------------------------------------------
-void TrackingManager::setup(Tracking_Configuration _trackingConfig)
+
+void TrackingManager::setup(Tracking_Configuration tracking_config)
 {
 	cout << "Setting Up Tracking Manager" << endl;
-	contourFinder.setMinAreaRadius(_trackingConfig.minarea);
-	contourFinder.setMaxAreaRadius(_trackingConfig.maxarea);
-	contourFinder.setThreshold(_trackingConfig.threshold);
-	tracker.setMaximumDistance(_trackingConfig.maxdistance);
-    tracker.setPersistence((unsigned int)_trackingConfig.persistance);
+    contour_finder_.setMinAreaRadius(tracking_config.min_area);
+    contour_finder_.setMaxAreaRadius(tracking_config.max_area);
+    contour_finder_.setThreshold(tracking_config.threshold);
+    tracker_.setMaximumDistance(tracking_config.max_distance);
+    tracker_.setPersistence((unsigned int)tracking_config.persistance);
 
-	_oneBlob = _trackingConfig.minsizeone;
-	_twoBlob = _trackingConfig.minsizetwo;
-	_threeBlob = _trackingConfig.minsizethree;
-	_flipVertically = _trackingConfig.flipvertically;
-	_historyLength = _trackingConfig.history;
-	_camerawidth = _trackingConfig.camerawidth;
-	_cameraheight = _trackingConfig.cameraheight;
+    one_blob_ = tracking_config.min_size_one;
+    two_blob_ = tracking_config.min_size_two;
+    three_blob_ = tracking_config.min_size_three;
+    flip_vertically_ = tracking_config.flip_vertically;
+    history_length_ = tracking_config.history;
+    camera_width_ = tracking_config.camera_width;
+    camera_height_ = tracking_config.camera_height;
 	
-    trackingHistory.setup(_oneBlob,_twoBlob,_threeBlob,int(_trackingConfig.startPos.y));
+    tracking_history_.setup(one_blob_,two_blob_,three_blob_,int(tracking_config.start_position.y));
 	
-	centerRect = ofRectangle(0, _trackingConfig.startPos.y-(_trackingConfig.offset/2), _camerawidth, _trackingConfig.offset);
+    center_rectangle_ = ofRectangle(0, tracking_config.start_position.y-(tracking_config.offset/2), camera_width_, tracking_config.offset);
 }
-//--------------------------------------------------------------
-void TrackingManager::update(Mat processedMat)
+
+void TrackingManager::update(Mat processed_image)
 {
-	if(!processedMat.empty())
+    if(!processed_image.empty())
 	{
-        if (ofGetFrameNum() > (unsigned long)_historyLength)
+        if (ofGetFrameNum() > (unsigned long)history_length_)
 		{
-			contourFinder.findContours(processedMat);
-			tracker.track(contourFinder.getBoundingRects());
+            contour_finder_.findContours(processed_image);
+            tracker_.track(contour_finder_.getBoundingRects());
 		}
 	}
 	
-	vector<Blob> &blobs = tracker.getFollowers();
+    vector<Blob> &blobs = tracker_.getFollowers();
     for(unsigned long i = 0; i < blobs.size(); i++)
 	{
-		if (centerRect.inside(blobs[i].getCurrentPosition().x, blobs[i].getCurrentPosition().y) && !blobs[i]._evaluating)
+        if (center_rectangle_.inside(blobs[i].getCurrentPosition().x, blobs[i].getCurrentPosition().y) && !blobs[i].evaluating_)
 		{
-			if (_flipVertically)
+            if (flip_vertically_)
 			{
 				if (blobs[i].getCurrentPosition().y > blobs[i].getOriginPosition().y)
 				{
 					int noOfBlobs = 0;
 					int blobWidth = blobs[i].getWidth();
-					if (blobWidth > _threeBlob)
+                    if (blobWidth > three_blob_)
 					{
 						noOfBlobs = 3;
 					}
 					
-					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
+                    if ((blobWidth > two_blob_) && (blobWidth < three_blob_))
 					{
 						noOfBlobs = 2;
 					}
 					
-					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
+                    if ((blobWidth > one_blob_) && (blobWidth < two_blob_))
 					{
 						noOfBlobs = 1;
 					}
 					
 					
 					
-					trackingHistory.addNewData(blobs[i].getWidth(), true);
-					ofNotifyEvent(blobIn, noOfBlobs, this);
+                    tracking_history_.addNewData(blobs[i].getWidth(), true);
+                    ofNotifyEvent(blob_in_, noOfBlobs, this);
 					blobs[i].kill();
 				}
 				else if (blobs[i].getCurrentPosition().y < blobs[i].getOriginPosition().y)
 				{
 					int noOfBlobs = 0;
 					int blobWidth = blobs[i].getWidth();
-					if (blobWidth > _threeBlob)
+                    if (blobWidth > three_blob_)
 					{
 						noOfBlobs = -3;
 					}
 					
-					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
+                    if ((blobWidth > two_blob_) && (blobWidth < three_blob_))
 					{
 						noOfBlobs = -2;
 					}
 					
-					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
+                    if ((blobWidth > one_blob_) && (blobWidth < two_blob_))
 					{
 						noOfBlobs = -1;
 					}
 					
-					trackingHistory.addNewData(blobs[i].getWidth(), false);
-					ofNotifyEvent(blobOut, noOfBlobs, this);
+                    tracking_history_.addNewData(blobs[i].getWidth(), false);
+                    ofNotifyEvent(blob_out_, noOfBlobs, this);
 					blobs[i].kill();
 				}
 			}
@@ -100,74 +100,74 @@ void TrackingManager::update(Mat processedMat)
 				{
 					int noOfBlobs = 0;
 					int blobWidth = blobs[i].getWidth();
-					if (blobWidth > _threeBlob)
+                    if (blobWidth > three_blob_)
 					{
 						noOfBlobs = 3;
 					}
 					
-					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
+                    if ((blobWidth > two_blob_) && (blobWidth < three_blob_))
 					{
 						noOfBlobs = 2;
 					}
 					
-					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
+                    if ((blobWidth > one_blob_) && (blobWidth < two_blob_))
 					{
 						noOfBlobs = 1;
 					}
 					
-					trackingHistory.addNewData(blobs[i].getWidth(), true);
-					ofNotifyEvent(blobIn, noOfBlobs, this);
+                    tracking_history_.addNewData(blobs[i].getWidth(), true);
+                    ofNotifyEvent(blob_in_, noOfBlobs, this);
 					blobs[i].kill();
 				}
 				else if (blobs[i].getCurrentPosition().y > blobs[i].getOriginPosition().y)
 				{
 					int noOfBlobs = 0;
 					int blobWidth = blobs[i].getWidth();
-					if (blobWidth > _threeBlob)
+                    if (blobWidth > three_blob_)
 					{
 						noOfBlobs = -3;
 					}
 					
-					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
+                    if ((blobWidth > two_blob_) && (blobWidth < three_blob_))
 					{
 						noOfBlobs = -2;
 					}
 					
-					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
+                    if ((blobWidth > one_blob_) && (blobWidth < two_blob_))
 					{
 						noOfBlobs = -1;
 					}
 					
-					trackingHistory.addNewData(blobs[i].getWidth(), false);
-					ofNotifyEvent(blobOut, noOfBlobs, this);
+                    tracking_history_.addNewData(blobs[i].getWidth(), false);
+                    ofNotifyEvent(blob_out_, noOfBlobs, this);
 					blobs[i].kill();
 				}
 			}
 			
-			blobs[i]._evaluating = true;
+            blobs[i].evaluating_ = true;
 		}
-		else if(blobs[i]._evaluating)
+        else if(blobs[i].evaluating_)
 		{
-			blobs[i]._evaluating = false;
+            blobs[i].evaluating_ = false;
 		}
 	}
 }
-//--------------------------------------------------------------
+
 void TrackingManager::draw()
 {
 	ofSetLineWidth(1);
 	ofFill();
-	vector<Blob> &followers = tracker.getFollowers();
+    vector<Blob> &followers = tracker_.getFollowers();
     for(unsigned long i = 0; i < followers.size(); i++)
 	{
 		followers[i].draw();
 	}
 	ofSetColor(ofColor::red);
-	contourFinder.draw();
+    contour_finder_.draw();
 	
 	ofNoFill();
 	ofSetColor(255, 255, 255);
-	ofDrawRectangle(centerRect);
+    ofDrawRectangle(center_rectangle_);
 	
-    trackingHistory.draw(_camerawidth);
+    tracking_history_.draw(camera_width_);
 }

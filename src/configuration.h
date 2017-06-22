@@ -11,67 +11,67 @@
 
 struct Camera_Configuration
 {
-	int camerawidth;
-	int cameraheight;
+    int camera_width;
+    int camera_height;
 	int history;
-	int mogThreshold;
+    int mog_threshold;
 	int threshold;
-	int dilateAmount;
-	int erodeAmount;
+    int dilate;
+    int erode;
 	int blur;
 	
-	float shadowPixelRatio;
+    float shadow_pixel_ratio;
 	
-	bool bTrackShadows;
+    bool track_shadows;
 	bool bFlipH;
 	bool bFlipV;
 	bool bUseMask;
-	bool bShowShadowImage;
+    bool show_shadows;
 	
-	vector<ofPoint> maskCoord;
+    vector<ofPoint> mask_coordinates;
 };
 
 
 struct Tracking_Configuration
 {
 	int threshold;
-	int minarea;
-	int maxarea;
+    int min_area;
+    int max_area;
 	
-	float blobdyingtime;
+    float blob_dying_time;
 	int persistance;
-	int maxdistance;
-	int minsizeone;
-	int minsizetwo;
-	int minsizethree;
+    int max_distance;
+    int min_size_one;
+    int min_size_two;
+    int min_size_three;
 	int history;
 	
-	ofPoint startPos;
-	ofPoint endPos;
-	int camerawidth;
-	int cameraheight;
+    ofPoint start_position;
+    ofPoint end_position;
+    int camera_width;
+    int camera_height;
 	
-	bool flipvertically;
+    bool flip_vertically;
 	int offset;
 };
 
 struct Configuration
 {
-	bool useCsvLogging;
-	Camera_Configuration cameraConfig;
-    Tracking_Configuration trackingConfig;
+    bool use_csv_logging;
+    Camera_Configuration camera_config;
+    Tracking_Configuration tracking_config;
 };
 
 struct Post_Data
 {
-	Post_Data(string count,string timestamp)
+    Post_Data(string count, string timestamp)
 	{
-		_count = count;
-		_timestamp = timestamp;
+        this->count = count;
+        this->timestamp = timestamp;
 	}
 	
-	string _count;
-	string _timestamp;
+    string count;
+    string timestamp;
 };
 
 #endif /* Configuration_h */

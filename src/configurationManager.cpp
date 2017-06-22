@@ -5,7 +5,7 @@
 // * Copyright (c) 2017 Stenden University
 
 #include "configurationManager.h"
-//--------------------------------------------------------------
+
 void ConfigurationManager::loadConfiguration(string file)
 {
 	cout << "Loading Configuration";
@@ -19,25 +19,25 @@ void ConfigurationManager::loadConfiguration(string file)
 		cout << " - Configuration File Found!" << endl;
 		
         // App Settings
-		config.useCsvLogging = configFile["Footfall"]["AppConfig"]["usecsvlogging"].asBool();
+        config.use_csv_logging = configFile["Footfall"]["AppConfig"]["usecsvlogging"].asBool();
 		
-		config.cameraConfig.camerawidth = configFile["Footfall"]["CameraConfig"]["camerawidth"].asInt();
-		config.cameraConfig.cameraheight = configFile["Footfall"]["CameraConfig"]["cameraheight"].asInt();
+        config.camera_config.camera_width = configFile["Footfall"]["CameraConfig"]["camerawidth"].asInt();
+        config.camera_config.camera_height = configFile["Footfall"]["CameraConfig"]["cameraheight"].asInt();
 	
-		config.cameraConfig.dilateAmount = configFile["Footfall"]["CameraConfig"]["dilate"].asInt();
-		config.cameraConfig.erodeAmount = configFile["Footfall"]["CameraConfig"]["erode"].asInt();
-		config.cameraConfig.blur = configFile["Footfall"]["CameraConfig"]["blur"].asInt();
-		config.cameraConfig.threshold = configFile["Footfall"]["CameraConfig"]["threshold"].asInt();
+        config.camera_config.dilate = configFile["Footfall"]["CameraConfig"]["dilate"].asInt();
+        config.camera_config.erode = configFile["Footfall"]["CameraConfig"]["erode"].asInt();
+        config.camera_config.blur = configFile["Footfall"]["CameraConfig"]["blur"].asInt();
+        config.camera_config.threshold = configFile["Footfall"]["CameraConfig"]["threshold"].asInt();
 		
-		config.cameraConfig.mogThreshold = configFile["Footfall"]["CameraConfig"]["mogthreshold"].asInt();
-		config.cameraConfig.history = configFile["Footfall"]["CameraConfig"]["history"].asInt();
-		config.cameraConfig.bTrackShadows = configFile["Footfall"]["CameraConfig"]["trackshadows"].asInt();
-		config.cameraConfig.shadowPixelRatio = configFile["Footfall"]["CameraConfig"]["shadowPixelRatio"].asFloat();
+        config.camera_config.mog_threshold = configFile["Footfall"]["CameraConfig"]["mogthreshold"].asInt();
+        config.camera_config.history = configFile["Footfall"]["CameraConfig"]["history"].asInt();
+        config.camera_config.track_shadows = configFile["Footfall"]["CameraConfig"]["trackshadows"].asInt();
+        config.camera_config.shadow_pixel_ratio = configFile["Footfall"]["CameraConfig"]["shadowPixelRatio"].asFloat();
 		
-		config.cameraConfig.bFlipH = configFile["Footfall"]["CameraConfig"]["fliphorizontally"].asBool();
-		config.cameraConfig.bFlipV = configFile["Footfall"]["CameraConfig"]["flipveritcally"].asBool();
-		config.cameraConfig.bUseMask = configFile["Footfall"]["CameraConfig"]["usemask"].asBool();
-		config.cameraConfig.bShowShadowImage = configFile["Footfall"]["CameraConfig"]["showshadowimage"].asBool();
+        config.camera_config.bFlipH = configFile["Footfall"]["CameraConfig"]["fliphorizontally"].asBool();
+        config.camera_config.bFlipV = configFile["Footfall"]["CameraConfig"]["flipveritcally"].asBool();
+        config.camera_config.bUseMask = configFile["Footfall"]["CameraConfig"]["usemask"].asBool();
+        config.camera_config.show_shadows = configFile["Footfall"]["CameraConfig"]["showshadowimage"].asBool();
 
 		vector<ofPoint> pts;
         int maskSize = int(configFile["Footfall"]["CameraConfig"]["MaskArea"].size());
@@ -45,38 +45,37 @@ void ConfigurationManager::loadConfiguration(string file)
 			ofPoint pt = ofPoint(configFile["Footfall"]["CameraConfig"]["MaskArea"][i]["coordx"].asInt(),configFile["Footfall"]["CameraConfig"]["MaskArea"][i]["coordy"].asInt());
 			pts.push_back(pt);
 		}
-		config.cameraConfig.maskCoord = pts;
+        config.camera_config.mask_coordinates = pts;
 		
 		// Tracking Configuration
-		config.trackingConfig.threshold = configFile["Footfall"]["TrackingConfig"]["threshold"].asInt();
-		config.trackingConfig.minarea = configFile["Footfall"]["TrackingConfig"]["minarea"].asInt();
-		config.trackingConfig.maxarea = configFile["Footfall"]["TrackingConfig"]["maxarea"].asInt();
-		config.trackingConfig.startPos = ofPoint(configFile["Footfall"]["TrackingConfig"]["startposx"].asInt(),configFile["Footfall"]["TrackingConfig"]["startposy"].asInt());
-		config.trackingConfig.offset = configFile["Footfall"]["TrackingConfig"]["offset"].asInt();
-		config.trackingConfig.flipvertically = configFile["Footfall"]["TrackingConfig"]["flipvertically"].asBool();
+        config.tracking_config.threshold = configFile["Footfall"]["TrackingConfig"]["threshold"].asInt();
+        config.tracking_config.min_area = configFile["Footfall"]["TrackingConfig"]["minarea"].asInt();
+        config.tracking_config.max_area = configFile["Footfall"]["TrackingConfig"]["maxarea"].asInt();
+        config.tracking_config.start_position = ofPoint(configFile["Footfall"]["TrackingConfig"]["startposx"].asInt(),configFile["Footfall"]["TrackingConfig"]["startposy"].asInt());
+        config.tracking_config.offset = configFile["Footfall"]["TrackingConfig"]["offset"].asInt();
+        config.tracking_config.flip_vertically = configFile["Footfall"]["TrackingConfig"]["flipvertically"].asBool();
 		
-		config.trackingConfig.persistance = configFile["Footfall"]["TrackingConfig"]["persistance"].asInt();
+        config.tracking_config.persistance = configFile["Footfall"]["TrackingConfig"]["persistance"].asInt();
 		
-		config.trackingConfig.history = config.cameraConfig.history;
+        config.tracking_config.history = config.camera_config.history;
 		
-		config.trackingConfig.blobdyingtime = configFile["Footfall"]["TrackingConfig"]["blobdyingtime"].asFloat();
+        config.tracking_config.blob_dying_time = configFile["Footfall"]["TrackingConfig"]["blobdyingtime"].asFloat();
 		
-		config.trackingConfig.minsizeone = configFile["Footfall"]["TrackingConfig"]["minsizeone"].asInt();
-		config.trackingConfig.minsizetwo = configFile["Footfall"]["TrackingConfig"]["minsizetwo"].asInt();
-		config.trackingConfig.minsizethree = configFile["Footfall"]["TrackingConfig"]["minsizethree"].asInt();
-		config.trackingConfig.maxdistance = configFile["Footfall"]["TrackingConfig"]["maxdistance"].asInt();
+        config.tracking_config.min_size_one = configFile["Footfall"]["TrackingConfig"]["minsizeone"].asInt();
+        config.tracking_config.min_size_two = configFile["Footfall"]["TrackingConfig"]["minsizetwo"].asInt();
+        config.tracking_config.min_size_three = configFile["Footfall"]["TrackingConfig"]["minsizethree"].asInt();
+        config.tracking_config.max_distance = configFile["Footfall"]["TrackingConfig"]["maxdistance"].asInt();
 		
-		config.trackingConfig.camerawidth = config.cameraConfig.camerawidth;
-        config.trackingConfig.cameraheight = config.cameraConfig.cameraheight;
+        config.tracking_config.camera_width = config.camera_config.camera_width;
+        config.tracking_config.camera_height = config.camera_config.camera_height;
 	}
 }
 
-//--------------------------------------------------------------
 Configuration ConfigurationManager::getConfiguration()
 {
 	return config;
 }
-//--------------------------------------------------------------
+
 void ConfigurationManager::printConfiguration()
 {
 	cout << configFile.getRawString() << endl;

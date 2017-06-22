@@ -14,6 +14,11 @@
 
 class CsvManager
 {
+    private:
+        ofxCsv logFile;
+        string _saveFolder;
+        vector<Post_Data> loggedData;
+
 	public:
 		//! Setup the Csv Manager
 		void setup(string saveFolder);
@@ -25,12 +30,7 @@ class CsvManager
 		void saveRecords();
 	
 		//! Close the Csv Manager
-		void close();
-	
-	private:
-		ofxCsv logFile;
-		string _saveFolder;
-		vector<Post_Data> loggedData;
+        void close();
 };
 
 #endif /* CsvManager_h */

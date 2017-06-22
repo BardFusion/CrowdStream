@@ -14,8 +14,11 @@
 
 class ConfigurationManager
 {
-	public:
-	
+    private:
+        ofxJSONElement configFile;
+        Configuration config;
+
+    public:
 		//! Load the Config file
 		void loadConfiguration(string file);
 	
@@ -23,10 +26,6 @@ class ConfigurationManager
 		void printConfiguration();
 	
 		//! Get the Configs
-		Configuration getConfiguration();
-	
-	private:
-		ofxJSONElement configFile;
-		Configuration config;
+        Configuration getConfiguration();
 };
 #endif /* ConfigurationManager_h */
