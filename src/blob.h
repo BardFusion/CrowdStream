@@ -14,14 +14,15 @@
 class Blob : public ofxCv::RectFollower
 {    
     private:
-
         ofVec2f current_position_;
         ofVec2f origininal_position_;
         int blob_width_ = 0;
         int blob_height_ = 0;
 
-	public:
-		void setup(const cv::Rect &track)
+    public:
+        bool evaluating_ = false;
+
+        void setup(const cv::Rect &track)
 		{
             current_position_ = ofxCv::toOf(track).getCenter();
             origininal_position_ = ofxCv::toOf(track).getCenter();
@@ -70,9 +71,7 @@ class Blob : public ofxCv::RectFollower
 		int getWidth()
 		{
             return blob_width_;
-		}
-	
-        bool evaluating_ = false;
+        }
 };
 
 

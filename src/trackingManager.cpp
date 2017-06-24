@@ -32,6 +32,7 @@ void TrackingManager::update(Mat processed_image)
 {
     if(!processed_image.empty())
 	{
+        // Allow for camera to setup during a set amount of time
         if (ofGetFrameNum() > (unsigned long)history_length_)
 		{
             contour_finder_.findContours(processed_image);
@@ -40,110 +41,57 @@ void TrackingManager::update(Mat processed_image)
 	}
 	
     vector<Blob> &blobs = tracker_.getFollowers();
+    int blob_count = 0;
+
     for(unsigned long i = 0; i < blobs.size(); i++)
 	{
         if (center_rectangle_.inside(blobs[i].getCurrentPosition().x, blobs[i].getCurrentPosition().y) && !blobs[i].evaluating_)
-		{
-            if (flip_vertically_)
-			{
-				if (blobs[i].getCurrentPosition().y > blobs[i].getOriginPosition().y)
-				{
-					int noOfBlobs = 0;
-					int blobWidth = blobs[i].getWidth();
-                    if (blobWidth > three_blob_)
-					{
-						noOfBlobs = 3;
-					}
-					
-                    if ((blobWidth > two_blob_) && (blobWidth < three_blob_))
-					{
-						noOfBlobs = 2;
-					}
-					
-                    if ((blobWidth > one_blob_) && (blobWidth < two_blob_))
-					{
-						noOfBlobs = 1;
-					}
-					
-					
-					
-                    tracking_history_.addNewData(blobs[i].getWidth(), true);
-                    ofNotifyEvent(blob_in_, noOfBlobs, this);
-					blobs[i].kill();
-				}
-				else if (blobs[i].getCurrentPosition().y < blobs[i].getOriginPosition().y)
-				{
-					int noOfBlobs = 0;
-					int blobWidth = blobs[i].getWidth();
-                    if (blobWidth > three_blob_)
-					{
-						noOfBlobs = -3;
-					}
-					
-                    if ((blobWidth > two_blob_) && (blobWidth < three_blob_))
-					{
-						noOfBlobs = -2;
-					}
-					
-                    if ((blobWidth > one_blob_) && (blobWidth < two_blob_))
-					{
-						noOfBlobs = -1;
-					}
-					
-                    tracking_history_.addNewData(blobs[i].getWidth(), false);
-                    ofNotifyEvent(blob_out_, noOfBlobs, this);
-					blobs[i].kill();
-				}
-			}
-			else {
-				if (blobs[i].getCurrentPosition().y < blobs[i].getOriginPosition().y)
-				{
-					int noOfBlobs = 0;
-					int blobWidth = blobs[i].getWidth();
-                    if (blobWidth > three_blob_)
-					{
-						noOfBlobs = 3;
-					}
-					
-                    if ((blobWidth > two_blob_) && (blobWidth < three_blob_))
-					{
-						noOfBlobs = 2;
-					}
-					
-                    if ((blobWidth > one_blob_) && (blobWidth < two_blob_))
-					{
-						noOfBlobs = 1;
-					}
-					
-                    tracking_history_.addNewData(blobs[i].getWidth(), true);
-                    ofNotifyEvent(blob_in_, noOfBlobs, this);
-					blobs[i].kill();
-				}
-				else if (blobs[i].getCurrentPosition().y > blobs[i].getOriginPosition().y)
-				{
-					int noOfBlobs = 0;
-					int blobWidth = blobs[i].getWidth();
-                    if (blobWidth > three_blob_)
-					{
-						noOfBlobs = -3;
-					}
-					
-                    if ((blobWidth > two_blob_) && (blobWidth < three_blob_))
-					{
-						noOfBlobs = -2;
-					}
-					
-                    if ((blobWidth > one_blob_) && (blobWidth < two_blob_))
-					{
-						noOfBlobs = -1;
-					}
-					
-                    tracking_history_.addNewData(blobs[i].getWidth(), false);
-                    ofNotifyEvent(blob_out_, noOfBlobs, this);
-					blobs[i].kill();
-				}
-			}
-			
+		{            
+            if (blobs[i].getCurrentPosition().y < blobs[i].getOriginPosition().y)
+            {
+                int blob_width = blobs[i].getWidth();
+                if (blob_width > three_blob_)
+                {
+                    blob_count = 3;
+                }
+
+                if ((blob_width > two_blob_) && (blob_width < three_blob_))
+                {
+                    blob_count = 2;
+                }
+
+                if ((blob_width > one_blob_) && (blob_width < two_blob_))
+                {
+                    blob_count = 1;
+                }
+
+                tracking_history_.addNewData(blobs[i].getWidth(), true);
+                ofNotifyEvent(blob_in_, blob_count, this);
+                blobs[i].kill();
+            }
+            else if (blobs[i].getCurrentPosition().y > blobs[i].getOriginPosition().y)
+            {
+                int blob_count = 0;
+                int blob_width = blobs[i].getWidth();
+                if (blob_width > three_blob_)
+                {
+                    blob_count = 3;
+                }
+
+                if ((blob_width > two_blob_) && (blob_width < three_blob_))
+                {
+                    blob_count = 2;
+                }
+
+                if ((blob_width > one_blob_) && (blob_width < two_blob_))
+                {
+                    blob_count = 1;
+                }
+
+                tracking_history_.addNewData(blobs[i].getWidth(), false);
+                ofNotifyEvent(blob_out_, blob_count, this);
+                blobs[i].kill();
+            }
             blobs[i].evaluating_ = true;
 		}
         else if(blobs[i].evaluating_)

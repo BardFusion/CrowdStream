@@ -23,9 +23,9 @@ struct Camera_Configuration
     float shadow_pixel_ratio;
 	
     bool track_shadows;
-	bool bFlipH;
-	bool bFlipV;
-	bool bUseMask;
+    bool flip_horizontal;
+    bool flip_vertical;
+    bool use_mask;
     bool show_shadows;
 	
     vector<ofPoint> mask_coordinates;

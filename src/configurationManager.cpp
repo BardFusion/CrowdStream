@@ -34,9 +34,9 @@ void ConfigurationManager::loadConfiguration(string file)
         config.camera_config.track_shadows = configFile["Footfall"]["CameraConfig"]["trackshadows"].asInt();
         config.camera_config.shadow_pixel_ratio = configFile["Footfall"]["CameraConfig"]["shadowPixelRatio"].asFloat();
 		
-        config.camera_config.bFlipH = configFile["Footfall"]["CameraConfig"]["fliphorizontally"].asBool();
-        config.camera_config.bFlipV = configFile["Footfall"]["CameraConfig"]["flipveritcally"].asBool();
-        config.camera_config.bUseMask = configFile["Footfall"]["CameraConfig"]["usemask"].asBool();
+        config.camera_config.flip_horizontal = configFile["Footfall"]["CameraConfig"]["fliphorizontally"].asBool();
+        config.camera_config.flip_vertical = configFile["Footfall"]["CameraConfig"]["flipveritcally"].asBool();
+        config.camera_config.use_mask = configFile["Footfall"]["CameraConfig"]["usemask"].asBool();
         config.camera_config.show_shadows = configFile["Footfall"]["CameraConfig"]["showshadowimage"].asBool();
 
 		vector<ofPoint> pts;

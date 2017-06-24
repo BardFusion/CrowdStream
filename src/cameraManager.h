@@ -39,17 +39,17 @@ class CameraManager
         ofxCvPiCam piCamera;
     #endif
 
-        Mat video_matrix;
-        Mat processed_mog;
-        Mat mask;
-        Mat combined_mask;
-        Mat background;
-        Mat unprocessed_mog;
+        Mat video_matrix_;
+        Mat processed_mog_;
+        Mat mask_;
+        Mat combined_mask_;
+        Mat background_;
+        Mat unprocessed_mog_;
 
-        BackgroundSubtractorMOG2 *pMOG2;
+        BackgroundSubtractorMOG2 *mog2_subtractor_;
 
         vector<cv::Point> mask_points_;
-        bool useMask_;
+        bool use_mask_;
         bool show_shadows_;
         int threshold_;
         int dilate_amount_;
