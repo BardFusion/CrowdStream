@@ -16,14 +16,14 @@
 			"erode": 6,
 			"history": 200,
 			"blur": 5,
-			"usemask": false,
+			"usemask": true,
 			"showshadowimage": true,
 			"MaskArea":
 			[
-			 {"coordx":0,"coordy":0},
-			 {"coordx":160,"coordy":0},
-			 {"coordx":160,"coordy":120},
-			 {"coordx":0,"coordy":120}
+			 {"coordx":150,"coordy":0},
+			 {"coordx":220,"coordy":0},
+			 {"coordx":220,"coordy":240},
+			 {"coordx":0,"coordy":240}
 		    ]
 		},
 		"TrackingConfig": {
@@ -38,7 +38,7 @@
 			"persistance":10,
 			"maxdistance":100,
 			"minsizeone": 50,
-			"minsizetwo": 200,
+			"minsizetwo": 150,
 			"minsizethree": 300
 		}
 	}

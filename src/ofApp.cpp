@@ -81,10 +81,15 @@ void ofApp::blobIn(int &val)
 
 void ofApp::blobOut(int &val)
 {
-	peopleOut += abs(val);
-    if (abs(val) > 0)
+    peopleOut += val;
+    if (peopleOut > peopleIn)
     {
-        cout << abs(val) << " Person(s) Went Out" << ", Count: " << (peopleIn-peopleOut) << endl;
+        cout << "Error, correcting out " << peopleOut << " --> " << peopleIn << endl;
+        peopleOut = peopleIn;
+    }
+    else if (val > 0)
+    {
+        cout << val << " Person(s) Went Out" << ", Count: " << (peopleIn-peopleOut) << endl;
     }
 
     if (log_to_csv_) csvManager.addRecord(ofToString(val), ofGetTimestampString("%Y-%m-%d %H:%M:%S"));

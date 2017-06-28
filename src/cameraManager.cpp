@@ -44,7 +44,7 @@ void CameraManager::setup(Camera_Configuration camera_config)
 	
 #ifdef USE_VIDEO
 	cout << " - Using Video" << endl;
-    video_player.load("testFootageOFFICIAL-ONE-EDIT.mp4");
+    video_player.load("pivideoEdit.mp4");
     video_player.setLoopState(OF_LOOP_NORMAL);
     video_player.play();
 #endif
