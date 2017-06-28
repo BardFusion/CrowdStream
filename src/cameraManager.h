@@ -28,15 +28,15 @@ class CameraManager
     private:
 
     #ifdef USE_VIDEO
-        ofVideoPlayer video_player;
+        ofVideoPlayer video_player_;
     #endif
 
     #ifdef USE_WEBCAM
-        ofVideoGrabber videoGrabber;
+        ofVideoGrabber video_grabber_;
     #endif
 
     #ifdef USE_PI_CAM
-        ofxCvPiCam piCamera;
+        ofxCvPiCam pi_camera_;
     #endif
 
         Mat video_matrix_;

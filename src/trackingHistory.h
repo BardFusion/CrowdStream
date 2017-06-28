@@ -54,11 +54,11 @@ class TrackingHistory
 
             ofPushStyle();
             ofSetLineWidth(2);
-            // Draw the Centre Line
+            // Draw the Center Line
             ofSetColor(ofColor::yellow);
             ofDrawLine(0,start_position_y_,width,start_position_y_);
 
-            // Draw the Centre X
+            // Draw the Center X
             ofSetColor(ofColor::yellow);
             ofDrawLine(float(width*0.5),start_position_y_-5,float(width*0.5),start_position_y_+5);
 

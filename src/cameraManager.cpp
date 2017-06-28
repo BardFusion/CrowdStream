@@ -24,7 +24,7 @@ void CameraManager::setup(Camera_Configuration camera_config)
         mask_ = cvCreateMat(camera_config.camera_height, camera_config.camera_width, CV_8UC1);
         combined_mask_ = cvCreateMat(camera_config.camera_height, camera_config.camera_width, CV_8UC1);
 		
-		// Fill the Mat with black
+        // Fill the mask with black
         for(int i=0; i<mask_.cols; i++)
             for(int j=0; j<mask_.rows; j++)
                 mask_.at<uchar>(cv::Point(i,j)) = 0;
@@ -34,7 +34,7 @@ void CameraManager::setup(Camera_Configuration camera_config)
         fillConvexPoly(mask_,&polyright[0],int(polyright.size()),255,8,0);
 	}
 	
-	// Setup the Background MOG2
+    // Setup the Background subtractor
     mog2_subtractor_ = new BackgroundSubtractorMOG2(camera_config.history,
                                          camera_config.mog_threshold,
                                          camera_config.track_shadows
@@ -44,21 +44,21 @@ void CameraManager::setup(Camera_Configuration camera_config)
 	
 #ifdef USE_VIDEO
 	cout << " - Using Video" << endl;
-    video_player.load("pivideoEdit.mp4");
-    video_player.setLoopState(OF_LOOP_NORMAL);
-    video_player.play();
+    video_player_.load("testFootageLATEST-EDIT.mp4");
+    video_player_.setLoopState(OF_LOOP_NORMAL);
+    video_player_.play();
 #endif
 	
 #ifdef USE_WEBCAM
 	cout << " - Using Web Camera" << endl;
-	videoGrabber.setVerbose(true);
-    videoGrabber.setup(camera_config.camerawidth, camera_config.cameraheight);
+    video_grabber_.setVerbose(true);
+    video_grabber_.setup(camera_config.camera_width, camera_config.camera_height);
 #endif
 	
 #ifdef USE_PI_CAM
 	cout << " - Using Pi Camera" << endl;
-    piCamera.setup(camera_config.camerawidth,camera_config.cameraheight,true);
-    piCamera.setFlips(camera_config.bFlipH,camera_config.bFlipV);
+    pi_camera_.setup(camera_config.camera_width,camera_config.camera_height,true);
+    pi_camera_.setFlips(camera_config.flip_horizontal,camera_config.flip_vertical);
 #endif
 	
     threshold_ = camera_config.threshold;
@@ -71,25 +71,25 @@ void CameraManager::setup(Camera_Configuration camera_config)
 void CameraManager::update()
 {
 #ifdef USE_VIDEO
-    video_player.update();
+    video_player_.update();
 	
-    if (video_player.isFrameNew())
+    if (video_player_.isFrameNew())
 	{
-        copy(video_player, video_matrix_);
+        copy(video_player_, video_matrix_);
 	}
 #endif
 
 #ifdef USE_WEBCAM
-	videoGrabber.update();
+    video_grabber_.update();
 	
-	if (videoGrabber.isFrameNew())
+    if (video_grabber_.isFrameNew())
 	{
-		copy(videoGrabber, videoMatrix);
+        copy(video_grabber_, video_matrix_);
 	}
 #endif
 
 #ifdef USE_PI_CAM
-	videoMatrix = piCamera.grab();
+    video_matrix_ = pi_camera_.grab();
 #endif
 	
     if (!video_matrix_.empty())
